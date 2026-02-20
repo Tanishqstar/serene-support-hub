@@ -5,7 +5,8 @@ import ChatInterface from "@/components/ChatInterface";
 import GroundingZone from "@/components/GroundingZone";
 import MoodTracker from "@/components/MoodTracker";
 import BreathingExercise from "@/components/BreathingExercise";
-import { Heart, Shield } from "lucide-react";
+import { Heart, Shield, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface MoodPoint {
   time: string;
@@ -48,9 +49,18 @@ const Index = () => {
             <h1 className="font-serif text-xl text-foreground leading-tight">Serenity</h1>
             <p className="text-xs text-muted-foreground">Mental Health Support Dashboard</p>
           </div>
-          <div className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
-            <Shield className="h-3.5 w-3.5" />
-            <span>End-to-end encrypted</span>
+          <div className="ml-auto flex items-center gap-4">
+            <Link
+              to="/journal"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <BookOpen className="h-3.5 w-3.5" />
+              <span>Journal</span>
+            </Link>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Shield className="h-3.5 w-3.5" />
+              <span>End-to-end encrypted</span>
+            </div>
           </div>
         </div>
       </motion.header>
