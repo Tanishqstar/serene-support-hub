@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import ReactMarkdown from "react-markdown";
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
@@ -89,8 +90,24 @@ async function streamChat({
 const ChatInterface = ({ onNewMessage }: ChatInterfaceProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: "welcome",
-      content: "Welcome to your safe space. I'm here to listen and support you. How are you feeling today?",
+      id: "about",
+      content: `🌿 Welcome to Serenity — your private mental health support companion.
+
+Here's how it works:
+
+• **Chat with me** — I'm an AI trained in evidence-based techniques like CBT and mindfulness. Share what's on your mind, and I'll listen without judgment.
+
+• **Mood Tracker** — Your emotional sentiment is tracked in real time on the chart beside us, helping you spot patterns over a session.
+
+• **Breathing Exercise** — Tap the breathing circle in the center panel to start a guided 4-4-6-2 inhale-hold-exhale cycle to calm your nervous system.
+
+• **Grounding Zone** — Interact with the 3D viewport on the right for a meditative visual experience.
+
+• **Crisis Helpline** — The button in the top-right connects you instantly to Indian mental health helplines if you ever need urgent support.
+
+⚠️ I'm not a replacement for professional therapy — always reach out to a qualified professional for ongoing care.
+
+So, how are you feeling today?`,
       role: "assistant",
       sentimentScore: 0.7,
       createdAt: new Date(),
@@ -189,13 +206,19 @@ const ChatInterface = ({ onNewMessage }: ChatInterfaceProps) => {
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                   msg.role === "user"
-                    ? "bg-chat-user text-foreground rounded-br-md"
+                    ? "bg-chat-user text-foreground rounded-br-md whitespace-pre-wrap"
                     : "bg-chat-assistant text-foreground rounded-bl-md"
                 }`}
               >
-                {msg.content}
+                {msg.role === "assistant" ? (
+                  <div className="prose prose-sm max-w-none [&>p]:my-1 [&>ul]:my-1 [&>ul]:pl-4 [&_strong]:text-foreground [&_li]:my-0.5">
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  </div>
+                ) : (
+                  msg.content
+                )}
               </div>
             </motion.div>
           ))}
