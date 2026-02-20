@@ -4,6 +4,7 @@ import EmergencyExit from "@/components/EmergencyExit";
 import ChatInterface from "@/components/ChatInterface";
 import GroundingZone from "@/components/GroundingZone";
 import MoodTracker from "@/components/MoodTracker";
+import BreathingExercise from "@/components/BreathingExercise";
 import { Heart, Shield } from "lucide-react";
 
 interface MoodPoint {
@@ -65,24 +66,7 @@ const Index = () => {
         <div className="hidden lg:flex lg:col-span-3 xl:col-span-4 flex-col gap-6 p-6 overflow-y-auto">
           <MoodTracker data={moodData} />
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="zen-card p-6"
-          >
-            <h3 className="font-serif text-base text-foreground mb-3">Breathing Exercise</h3>
-            <div className="flex items-center justify-center py-6">
-              <div className="relative">
-                <div className="h-24 w-24 rounded-full border-2 border-primary/30 animate-breathe flex items-center justify-center">
-                  <span className="text-xs text-muted-foreground">Breathe</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground text-center">
-              Follow the circle — inhale as it expands, exhale as it contracts
-            </p>
-          </motion.div>
+          <BreathingExercise />
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
